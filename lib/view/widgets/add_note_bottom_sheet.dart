@@ -8,40 +8,98 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
+    return const Padding(
+      padding: EdgeInsets.symmetric(
         horizontal: 16,
       ),
+      child: SingleChildScrollView(
+        child: AddNoteForm(), //my from that can i write notes
+      ),
+    );
+  }
+}
+
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({
+    super.key,
+  });
+
+  @override
+  State<AddNoteForm> createState() => _AddNoteFormState();
+}
+
+class _AddNoteFormState extends State<AddNoteForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  String? title, subTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      autovalidateMode: autovalidateMode,
       child: Column(
         children: [
           const SizedBox(
             height: 32,
           ),
-          const CustomTextFormField(
+          CustomTextFormField(
+            onSaved: (val) {
+              title = val;
+            },
+            validator: (val) {
+              if (val?.isEmpty ?? true) {
+                return 'Field  is required';
+              } else {
+                return null;
+              }
+            },
             obscureText: true,
             hintText: 'Title',
-            hintStyle: TextStyle(color: primary),
-            style: TextStyle(color: primary),
+            hintStyle: const TextStyle(color: primary),
+            style: const TextStyle(color: primary),
           ),
           const SizedBox(
             height: 28,
           ),
-          const CustomTextFormField(
+          CustomTextFormField(
+            onSaved: (val) {
+              subTitle = val;
+            },
+            validator: (val) {
+              if (val?.isEmpty ?? true) {
+                return 'Field  is required';
+              } else {
+                return null;
+              }
+            },
             obscureText: true,
             hintText: 'Content',
-            hintStyle: TextStyle(color: primary),
-            style: TextStyle(color: primary),
-            maxLines: 8,
+            hintStyle: const TextStyle(color: primary),
+            style: const TextStyle(color: primary),
+            maxLines: 6,
           ),
           const SizedBox(
-            height: 46,
+            height: 20,
           ),
           MainButton(
             width: 400,
             backgroundColor: primary,
             textColor: Colors.white,
             text: 'Add',
-            onPressed: () {},
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+              } else {
+                autovalidateMode = AutovalidateMode.always;
+                setState(() {});
+              }
+            },
+          ),
+          const SizedBox(
+            height: 100,
           ),
         ],
       ),
