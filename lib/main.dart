@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:note_it/models/note_model.dart';
 import 'package:note_it/routes_manager.dart';
 
 import 'constant.dart';
@@ -10,6 +11,7 @@ void main() async {
   await Hive.initFlutter();
 
   await Hive.openBox(knotesBox);
+  Hive.registerAdapter(NoteModelAdapter());
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     // navigation bar color
