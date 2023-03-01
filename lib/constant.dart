@@ -8,5 +8,7 @@ class FontConstants {
   static const String montserratFont = 'Montserrat';
   static const String hubballiFont = 'Hubballi';
   static const String rulukoFont = 'Ruluko';
-
 }
+
+//**************Strings**************//
+const knotesBox = 'notes_box';

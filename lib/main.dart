@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note_it/routes_manager.dart';
 
-void main() {
+import 'constant.dart';
+
+void main() async {
+  await Hive.initFlutter();
+
+  await Hive.openBox(knotesBox);
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     // navigation bar color
     statusBarColor: Color(0xffEEEEEE), // status bar color
