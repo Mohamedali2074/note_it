@@ -17,5 +17,7 @@ class NoteModel extends HiveObject {
     required this.subTitle,
     required this.date,
   });
+
+  void fetchAllNotes() {}
   
 }

@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_it/constant.dart';
 import 'package:note_it/cubits/notes_cubit/notes_cubit.dart';
+import 'package:note_it/models/note_model.dart';
 import 'package:note_it/routes_manager.dart';
 import 'package:note_it/view/widgets/add_note_bottom_sheet.dart';
 
-class MyNotesPage extends StatelessWidget {
+class MyNotesPage extends StatefulWidget {
   const MyNotesPage({super.key});
 
+  @override
+  State<MyNotesPage> createState() => _MyNotesPageState();
+}
+
+class _MyNotesPageState extends State<MyNotesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -105,7 +111,10 @@ class CustomSearchBar extends StatelessWidget {
 class NoteItem extends StatelessWidget {
   const NoteItem({
     Key? key,
+    required this.note,
   }) : super(key: key);
+
+  final NoteModel note;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +135,7 @@ class NoteItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '13/1/2023',
+                note.date,
                 style: TextStyle(
                   color: Colors.black.withOpacity(.4),
                   fontSize: 18,
@@ -135,9 +144,9 @@ class NoteItem extends StatelessWidget {
               ),
               ListTile(
                 contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0),
-                title: const Text(
-                  'note title',
-                  style: TextStyle(
+                title: Text(
+                  note.title,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 25,
                     fontFamily: FontConstants.montserratFont,
@@ -147,7 +156,7 @@ class NoteItem extends StatelessWidget {
                 subtitle: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
-                    'note subtitle',
+                    note.subTitle,
                     style: TextStyle(
                       color: Colors.black.withOpacity(.4),
                       fontSize: 18,
@@ -178,21 +187,40 @@ class NoteItem extends StatelessWidget {
   }
 }
 
-class NotesListView extends StatelessWidget {
+class NotesListView extends StatefulWidget {
   const NotesListView({super.key});
 
   @override
+  State<NotesListView> createState() => _NotesListViewState();
+}
+
+class _NotesListViewState extends State<NotesListView> {
+  @override
+  void initState() {
+    BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: ListView.builder(
-          padding: EdgeInsets.zero,
-          itemBuilder: (context, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(vertical: 4),
-              child: NoteItem(),
-            );
-          }),
+    return BlocBuilder<NotesCubit, NotesState>(
+      builder: (context, state) {
+        List<NoteModel> notes = BlocProvider.of<NotesCubit>(context).notes!;
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: ListView.builder(
+              itemCount: notes.length,
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: NoteItem(
+                    note: notes[index],
+                  ),
+                );
+              }),
+        );
+      },
     );
   }
 }
