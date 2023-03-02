@@ -6,6 +6,7 @@ class MainButton extends StatelessWidget {
   final String text;
   final Function()? onPressed;
   final int? width;
+  final bool isLoading;
 
   const MainButton({
     Key? key,
@@ -14,6 +15,7 @@ class MainButton extends StatelessWidget {
     required this.text,
     this.onPressed,
     this.width = 200,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -29,10 +31,14 @@ class MainButton extends StatelessWidget {
           ),
           backgroundColor: backgroundColor,
         ),
-        child: Text(
-          text,
-          style: TextStyle(color: textColor, fontSize: 18),
-        ),
+        child: isLoading
+            ? const CircularProgressIndicator(
+                color: Colors.black,
+              )
+            : Text(
+                text,
+                style: TextStyle(color: textColor, fontSize: 18),
+              ),
       ),
     );
   }
