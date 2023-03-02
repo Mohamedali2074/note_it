@@ -14,6 +14,7 @@ class MyNotesPage extends StatelessWidget {
         backgroundColor: primary,
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             backgroundColor: const Color(0xffEEEEEE),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
