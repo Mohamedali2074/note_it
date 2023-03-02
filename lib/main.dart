@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:note_it/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:note_it/cubits/notes_cubit/notes_cubit.dart';
 import 'package:note_it/models/note_model.dart';
 import 'package:note_it/simple_bloc_observer.dart';
@@ -19,8 +18,7 @@ void main() async {
   await Hive.openBox<NoteModel>(knotesBox);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    // navigation bar color
-    statusBarColor: Color(0xffEEEEEE), // status bar color
+    statusBarColor: Colors.grey, // status bar color
   ));
   runApp(const MyApp());
 }

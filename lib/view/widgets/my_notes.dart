@@ -94,7 +94,8 @@ class CustomSearchBar extends StatelessWidget {
         decoration: const InputDecoration(
           border: InputBorder.none,
           labelText: 'Search',
-          labelStyle: TextStyle(fontFamily: FontConstants.montserratFont),
+          labelStyle: TextStyle(
+              fontFamily: FontConstants.montserratFont, color: Colors.black),
           prefixIcon: Icon(
             Icons.search,
             color: Colors.black,
@@ -116,10 +117,14 @@ class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return  EditNote(note: note,);
-      }),),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return EditNote(
+            note: note,
+          );
+        }),
+      ),
       child: Card(
         elevation: 4,
         shadowColor: Colors.grey,
@@ -137,7 +142,7 @@ class NoteItem extends StatelessWidget {
               Text(
                 note.date,
                 style: TextStyle(
-                  color: Colors.black.withOpacity(.4),
+                  color: Colors.black.withOpacity(.7),
                   fontSize: 18,
                   fontFamily: FontConstants.hubballiFont,
                 ),
@@ -157,8 +162,8 @@ class NoteItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     note.subTitle,
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(.4),
+                    style: const TextStyle(
+                      color: Colors.black,
                       fontSize: 18,
                       fontFamily: FontConstants.hubballiFont,
                     ),

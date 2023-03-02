@@ -43,8 +43,8 @@ class _EditNoteState extends State<EditNote> {
                 onChanged: (val) {
                   title = val;
                 },
+                obscureText: false,
                 keyboardType: TextInputType.multiline,
-                obscureText: true,
                 hintText: widget.note.title,
                 hintStyle: const TextStyle(color: primary),
                 style: const TextStyle(color: primary),
@@ -56,8 +56,8 @@ class _EditNoteState extends State<EditNote> {
                 onChanged: (val) {
                   content = val;
                 },
+                obscureText: false,
                 keyboardType: TextInputType.multiline,
-                obscureText: true,
                 hintText: widget.note.subTitle,
                 hintStyle: const TextStyle(color: primary),
                 style: const TextStyle(color: primary),

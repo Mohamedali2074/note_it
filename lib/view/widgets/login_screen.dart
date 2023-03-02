@@ -60,6 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(
                 fontFamily: FontConstants.hubballiFont,
                 fontSize: 15.sp,
+                fontWeight: FontWeight.bold,
               ),
             ),
             Column(
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ? 'please enter your Email or Username'
                                   : null,
                               keyboardType: TextInputType.emailAddress,
-                              obscureText: true,
+                              obscureText: false,
                               hintText: 'Email or Username',
                               hintStyle: const TextStyle(color: Colors.black),
                               style: const TextStyle(color: Colors.black),

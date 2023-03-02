@@ -81,7 +81,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 return null;
               }
             },
-            obscureText: true,
+            obscureText: false,
             hintText: 'Title',
             hintStyle: const TextStyle(color: primary),
             style: const TextStyle(color: primary),
@@ -100,7 +100,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 return null;
               }
             },
-            obscureText: true,
+            obscureText: false,
             hintText: 'Content',
             hintStyle: const TextStyle(color: primary),
             style: const TextStyle(color: primary),
