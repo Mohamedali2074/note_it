@@ -13,9 +13,9 @@ import 'constant.dart';
 void main() async {
   await Hive.initFlutter();
 
-  await Hive.openBox(knotesBox);
-  Hive.registerAdapter(NoteModelAdapter());
   Bloc.observer = SimpleBlocObserver();
+  Hive.registerAdapter(NoteModelAdapter());
+  await Hive.openBox<NoteModel>(knotesBox);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     // navigation bar color
@@ -35,15 +35,10 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => AddNoteCubit()),
-          ],
-          child: const MaterialApp(
-            debugShowCheckedModeBanner: false,
-            onGenerateRoute: RoutesGenerator.getRoute,
-            initialRoute: Routes.splashRoute,
-          ),
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: RoutesGenerator.getRoute,
+          initialRoute: Routes.splashRoute,
         );
       },
     );
