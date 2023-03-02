@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_it/constant.dart';
 import 'package:note_it/cubits/add_note_cubit/add_note_cubit.dart';
@@ -123,7 +126,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     var noteModel = NoteModel(
                       title: title!,
                       subTitle: subTitle!,
-                      date: DateTime.now().toString(),
+                      date: DateFormat.yMEd().format(
+                        DateTime.now(),
+                      ),
                     );
 
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
