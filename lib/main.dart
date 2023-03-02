@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note_it/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:note_it/cubits/notes_cubit/notes_cubit.dart';
 import 'package:note_it/models/note_model.dart';
 import 'package:note_it/routes_manager.dart';
 import 'package:note_it/simple_bloc_observer.dart';
@@ -35,10 +36,13 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: RoutesGenerator.getRoute,
-          initialRoute: Routes.splashRoute,
+        return BlocProvider(
+          create: (context) => NotesCubit(),
+          child: const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: RoutesGenerator.getRoute,
+            initialRoute: Routes.splashRoute,
+          ),
         );
       },
     );

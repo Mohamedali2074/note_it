@@ -16,63 +16,60 @@ class MyNotesPage extends StatefulWidget {
 class _MyNotesPageState extends State<MyNotesPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NotesCubit(),
-      child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: primary,
-          onPressed: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              backgroundColor: const Color(0xffEEEEEE),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              context: context,
-              builder: (context) {
-                return const AddNoteBottomSheet();
-              },
-            );
-          },
-          child: const Icon(
-            Icons.edit,
-          ),
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primary,
+        onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: const Color(0xffEEEEEE),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            context: context,
+            builder: (context) {
+              return const AddNoteBottomSheet();
+            },
+          );
+        },
+        child: const Icon(
+          Icons.edit,
         ),
-        backgroundColor: const Color(0xffEEEEEE),
-        body: SafeArea(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/note-icon.png',
-                    height: 50,
-                    width: 50,
+      ),
+      backgroundColor: const Color(0xffEEEEEE),
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/note-icon.png',
+                  height: 50,
+                  width: 50,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Text(
+                  'My notes',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontFamily: FontConstants.montserratFont,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Text(
-                    'My notes',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: FontConstants.montserratFont,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const CustomSearchBar(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Expanded(
-                    child: NotesListView(),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const CustomSearchBar(),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Expanded(
+                  child: NotesListView(),
+                ),
+              ],
             ),
           ),
         ),
@@ -170,10 +167,13 @@ class NoteItem extends StatelessWidget {
                     bottom: 30,
                   ),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      note.delete();
+                      BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                    },
                     icon: const Icon(
                       Icons.delete,
-                      color: Colors.black,
+                      color: primary,
                       size: 32,
                     ),
                   ),
