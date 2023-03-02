@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.style,
     this.hintStyle,
-    this.maxLines = 1, this.onSaved,
+    this.maxLines = 1, this.onSaved, this.onChanged,
   }) : super(key: key);
   final TextEditingController? controller;
   final FormFieldValidator? validator;
@@ -26,11 +26,14 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle style;
   final int? maxLines;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
+
 
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       onSaved: onSaved,
       maxLines: maxLines,
       controller: controller,

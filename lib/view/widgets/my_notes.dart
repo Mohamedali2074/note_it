@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_it/constant.dart';
 import 'package:note_it/cubits/notes_cubit/notes_cubit.dart';
 import 'package:note_it/models/note_model.dart';
-import 'package:note_it/routes_manager.dart';
 import 'package:note_it/view/widgets/add_note_bottom_sheet.dart';
+import 'package:note_it/view/widgets/edit_note.dart';
 
 class MyNotesPage extends StatefulWidget {
   const MyNotesPage({super.key});
@@ -116,7 +116,10 @@ class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(Routes.myNotesViewBodyRoute),
+      onTap: () =>
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return  EditNote(note: note,);
+      }),),
       child: Card(
         elevation: 4,
         shadowColor: Colors.grey,

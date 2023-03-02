@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:note_it/constant.dart';
-import 'package:note_it/routes_manager.dart';
 import 'package:note_it/view/widgets/custom_text_form_field.dart';
+import 'package:note_it/view/widgets/my_notes.dart';
 
 import 'main_button.dart';
 
@@ -151,7 +151,10 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 setState(() {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.of(context).pushNamed(Routes.myNotesRoute);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const MyNotesPage();
+                    }));
                     _formKey.currentState!.reset();
                   } else {
                     debugPrint('there was an error');

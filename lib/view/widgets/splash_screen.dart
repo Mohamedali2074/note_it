@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:note_it/constant.dart';
-import 'package:note_it/routes_manager.dart';
+import 'package:note_it/view/widgets/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -78,8 +78,10 @@ class SplashScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TextButton(
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed(Routes.loginRoute),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const LoginScreen();
+                      })),
                       child: const Text(
                         'log-in',
                         style: TextStyle(

@@ -1,16 +1,14 @@
-
 import 'package:hive/hive.dart';
 
 part 'note_model.g.dart';
 
 @HiveType(typeId: 0)
 class NoteModel extends HiveObject {
-
   @HiveField(0)
-  final String title;
+  String title;
   @HiveField(1)
-  final String subTitle;
-    @HiveField(2)
+  String subTitle;
+  @HiveField(2)
   final String date;
   NoteModel({
     required this.title,
@@ -19,5 +17,4 @@ class NoteModel extends HiveObject {
   });
 
   void fetchAllNotes() {}
-  
 }
